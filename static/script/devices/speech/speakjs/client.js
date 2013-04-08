@@ -19,15 +19,17 @@ require.def(
                 }
                 
                 try {
-                    this._speakWorker = new Worker('/static/catal/img/speak/speakWorker.js');
+                    // Workers loaded relative to parent script URL, so figure out the path to this module
+                    this._speakWorker = new Worker(getModulePath() + '/speakWorker.js');
                   this._logger.debug('speak.js worker loaded successfully');
                 } catch(e) {
                   this._logger.log('speak.js warning: no worker support');
                   try {
-                      device.loadScript('/static/catal/img/speak/speakGenerator.js');
+                      // TODO: Can this be a require module?
+                      device.loadScript(getModulePath() + '/speakGenerator.js');
                       this._logger.log('loaded speakGenerator.js directly');
                   }
-                  catch(e) {
+                  catch(err) {
                       this._logger.log("oh god, loading speakGenerator.js directly didn't work either");
                   }
                 }
@@ -162,6 +164,12 @@ require.def(
             };
             speakWorker.postMessage({ text: text, args: args });
           }
+        }
+        
+        function getModulePath() {
+            // URL to this script
+            var thisScript = require.nameToUrl('antie/devices/speech/speakjs/client', null, '_');
+            return thisScript.substr(0, thisScript.lastIndexOf('/'));
         }
         
         Device.prototype.createSpeechSynth = function() {
