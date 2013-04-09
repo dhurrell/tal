@@ -20,17 +20,18 @@ require.def(
                 
                 try {
                     // Workers loaded relative to parent script URL, so figure out the path to this module
+                    // TODO: Won't work if the app is bootstrapped from a different host than where the scripts are stored (e.g. pal vs static)
                     this._speakWorker = new Worker(getModulePath() + '/speakWorker.js');
-                  this._logger.debug('speak.js worker loaded successfully');
+                    this._logger.debug('speak.js worker loaded successfully');
                 } catch(e) {
-                  this._logger.log('speak.js warning: no worker support');
+                  this._logger.log('speak.js warning: no worker support: ') + e.message;
                   try {
                       // TODO: Can this be a require module?
                       device.loadScript(getModulePath() + '/speakGenerator.js');
                       this._logger.log('loaded speakGenerator.js directly');
                   }
                   catch(err) {
-                      this._logger.log("oh god, loading speakGenerator.js directly didn't work either");
+                      this._logger.log("loading speakGenerator.js directly didn't work either: ") + e.message;
                   }
                 }
             },
