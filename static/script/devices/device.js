@@ -659,6 +659,13 @@ require.def('antie/devices/device',
              */
             isBroadcastSourceSupported: function() {
             	return false;
+            },
+            /**
+             * Check whether the device has a Text-To-Speech API available.
+             * @returns {Boolean} true if the API is available, false if not.
+             */
+            isSpeechSupported: function() {
+                return false;
             }
         });
         /**

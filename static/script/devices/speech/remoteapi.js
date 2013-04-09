@@ -1,18 +1,19 @@
+/**
+ * @fileOverview Implementation of a Text-to-Speech API utilising a remote web service to carry out the TTS operation,
+ * returning AAC audio. The URL of the remote web service is specified in the device configuration.
+ */
 require.def(
     'antie/devices/speech/remoteapi',
     [
-         'antie/class',
+         'antie/devices/speech/basespeech',
          'antie/devices/device',
          'antie/audiosource'
     ],
-    function(Class, Device, AudioSource) {
-        var Speaker = Class.extend({
-            /**
-             * Initialise speech, passing in the device handle. 
-             */
+    function(BaseSpeech, Device, AudioSource) {
+        var Speaker = BaseSpeech.extend({
+            /* See basespeech.js for documentation */
             init: function(device) {
-                this._player = device.createPlayer('speechPlayer', 'audio');
-                this._logger = device.getLogger();
+                this._super(device);
                 this._remoteApiPrefix = device.getConfig().voice && device.getConfig().voice.api || false;
                 
                 if(!this._remoteApiPrefix) {
@@ -22,7 +23,8 @@ require.def(
                 this._logger.debug("Initialised remoteapi speech synth");
             },
             
-            speak: function(text, onComplete) {
+            /* See basespeech.js for documentation */
+            _speakInternal: function(text, onComplete) {
                 var self = this;
                 var onCompleteInternal = function() {
                     self._player.removeEventListener('ended', onCompleteInternal);
@@ -33,7 +35,7 @@ require.def(
                 var audioSource = new AudioSource(sourceUrl, 'audio/mp4');
                 this._player.setSources([audioSource]);
                 
-                if(typeof onComplete === 'function') {
+                if (typeof onComplete === 'function') {
                     this._player.addEventListener('ended', onCompleteInternal);
                 }
                 
@@ -41,15 +43,15 @@ require.def(
                 this._player.play();
             },
             
-            stop: function() {
-                throw new Error("Not implemented!");
-            },
-            
-            destroy: function() {
-                this._player.destroy();
+            /* See basespeech.js for documentation */
+            _stopInternal: function() {
+                this._player.stop();
             }
         });
 
+        /**
+         * Return the class represented here when device.createSpeechSynth() is called.
+         */
         Device.prototype.createSpeechSynth = function() {
             return new Speaker(this);
         };

@@ -1,18 +1,18 @@
+/**
+ * @fileOverview Implementation of a Text-to-Speech API utilising the speak.js library to generate speech audio in pure JavaScript.
+ */
 require.def(
     'antie/devices/speech/speakjs/client',
     [
-         'antie/class',
+         'antie/devices/speech/basespeech',
          'antie/devices/device',
          'antie/devices/media/html5'
     ],
-    function(Class, Device, HTML5Player) {
-        var Speaker = Class.extend({
-            /**
-             * Initialise speech, passing in the device handle. 
-             */
+    function(BaseSpeech, Device, HTML5Player) {
+        var Speaker = BaseSpeech.extend({
+            /* See basespeech.js for documentation */
             init: function(device) {
-                this._player = device.createPlayer('speechPlayer', 'audio');
-                this._logger = device.getLogger();
+                this._super(device);
                 if(!(this._player instanceof HTML5Player)) {
                     this._player.destroy();
                     throw new Error("Only the HTML5 media player is supported by this speech module.");
@@ -36,30 +36,13 @@ require.def(
                 }
             },
             
-            /**
-             * Speak the requested text.
-             * text {String} Text to speak.
-             * onComplete {Function} Optional callback on completion.
-             */
-            speak: function(text, onComplete) {
-                // TODO: Make more cleverer to split up into multiple sections.
+            /* See basespeech.js for documentation */
+            _speakInternal: function(text, onComplete) {
                 var options = { amplitude: 100, wordgap: 0, pitch: 50, speed: 175 };
                 
+                // TODO: Need to call completion callback.
+                // TODO: Also need to implement _stopInternal()
                 speakInternal(text, options, this._speakWorker, this._logger, this._player._mediaElement);
-                if(typeof onComplete === "function") {
-                   onComplete(); 
-                }
-            },
-            
-            /**
-             * Stop speaking.
-             */
-            stop: function() {
-                throw new Error("Not implemented.");
-            },
-            
-            destroy: function() {
-                this._player.destroy();
             }
         });
         
@@ -173,6 +156,9 @@ require.def(
             return thisScript.substr(0, thisScript.lastIndexOf('/'));
         }
         
+        /**
+         * Return the class represented here when device.createSpeechSynth() is called.
+         */
         Device.prototype.createSpeechSynth = function() {
             return new Speaker(this);
         };
