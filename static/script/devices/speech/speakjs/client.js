@@ -24,14 +24,14 @@ require.def(
                     this._speakWorker = new Worker(getModulePath() + '/speakWorker.js');
                     this._logger.debug('speak.js worker loaded successfully');
                 } catch(e) {
-                  this._logger.log('speak.js warning: no worker support: ') + e.message;
+                  this._logger.log('speak.js warning: no worker support: ' + e.message);
                   try {
                       // TODO: Can this be a require module?
                       device.loadScript(getModulePath() + '/speakGenerator.js');
                       this._logger.log('loaded speakGenerator.js directly');
                   }
                   catch(err) {
-                      this._logger.log("loading speakGenerator.js directly didn't work either: ") + e.message;
+                      this._logger.log("loading speakGenerator.js directly didn't work either: " + e.message);
                   }
                 }
             },
