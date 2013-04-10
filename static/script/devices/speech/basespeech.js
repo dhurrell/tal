@@ -23,7 +23,6 @@ require.def(
              * @param {Object} device Handle to the device.
              */
             init: function(device) {
-                this._player = device.createPlayer('speechPlayer', 'audio');
                 this._logger = device.getLogger();
             },
             
@@ -35,6 +34,11 @@ require.def(
              * @param {Function} onComplete Optional callback to be called when finished.
              */
             speak: function(text, onComplete) {
+                // If I'm already speaking, stop
+                if (this._speak) {
+                    this.stop();
+                }
+
                 if (text && text.length > 0) {
                     this._speak = true;
                     var self = this;
@@ -51,13 +55,16 @@ require.def(
                             if (chunker.hasNextChunk()) {
                                 self._speakInternal(chunker.getNextChunk(), readyForMoreSpeech);
                             }
-                            else if (typeof onComplete === 'function') {
-                                onComplete();
+                            else {
+                                self._speak = false;
+                                if (typeof onComplete === 'function') {
+                                    onComplete();
+                                }
                             }
                         }
                     };
                     
-                    // Start the speech off, will continue until finished.
+                    // Start the speech off, will continue until finished or stopped.
                     readyForMoreSpeech();
                 }
             },
@@ -78,7 +85,6 @@ require.def(
              */
             destroy: function() {
                 this.stop();
-                this._player.destroy();
             },
             
             /**
@@ -88,7 +94,7 @@ require.def(
              * @param {String} textChunk Chunk of text to be spoken.
              * @param {Function} Callback to be called on completion of the chunk.
              */
-            _speakInternal: function(textChunk, onComplete) {
+            _speakInternal: function(textChunk, onComplete) { // jshint unused:false
             },
             
             /**

@@ -13,6 +13,8 @@ require.def(
             /* See basespeech.js for documentation */
             init: function(device) {
                 this._super(device);
+                this._player = device.createPlayer('speechPlayer', 'audio');
+                this._player.render();
                 if(!(this._player instanceof HTML5Player)) {
                     this._player.destroy();
                     throw new Error("Only the HTML5 media player is supported by this speech module.");
@@ -35,7 +37,13 @@ require.def(
                   }
                 }
             },
-            
+
+            destroy: function() {
+                this._player.stop();
+                this._player.destroy();
+                this.player = null;
+            },
+
             /* See basespeech.js for documentation */
             _speakInternal: function(text, onComplete) {
                 var options = { amplitude: 100, wordgap: 0, pitch: 50, speed: 175 };
