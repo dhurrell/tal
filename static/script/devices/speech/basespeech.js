@@ -7,9 +7,16 @@ require.def(
     [
          'antie/class',
          'antie/devices/device',
-         'antie/speech/chunker'
+         'antie/devices/speech/chunker'
     ],
     function(Class, Device, Chunker) {
+        /**
+         * Allow clients to see that a supported speech API is available on this device.
+         */
+        Device.prototype.isSpeechSupported = function() {
+            return true;
+        };
+
         return Class.extend({
             /**
              * @constructor
@@ -51,7 +58,7 @@ require.def(
                     };
                     
                     // Start the speech off, will continue until finished.
-                    readyForMoreSpeech(chunker.getNextChunk());
+                    readyForMoreSpeech();
                 }
             },
             
@@ -62,7 +69,7 @@ require.def(
                 this._speak = false;
                 
                 if (typeof this._stopInternal === 'function') {
-                    this._stopInternal;
+                    this._stopInternal();
                 }
             },
             
@@ -93,12 +100,5 @@ require.def(
             _stopInternal: function() {
             }
         });
-        
-        /**
-         * Allow clients to see that a supported speech API is available on this device.
-         */
-        Device.prototype.isSpeechSupported = function() {
-            return true;
-        };
     }
 );
