@@ -10,14 +10,22 @@ require.def(
          'antie/audiosource'
     ],
     function(BaseSpeech, Device, AudioSource) {
+        var _speechEnd;
         var Speaker = BaseSpeech.extend({
             /* See basespeech.js for documentation */
             init: function(device) {
                 var self = this;
+                _speechEnd = function(ev) {
+                    self._logger.log('Finished talking');
+                    if (typeof self._onComplete === 'function') {
+                        self._onComplete();
+                    }
+                };
+                
                 this._super(device);
                 this._player = device.createPlayer('speechPlayer', 'audio');
                 this._player.render();
-                this._player.addEventListener('ended', this._speechEnd);
+                this._player.addEventListener('ended', _speechEnd);
                 this._remoteApiPrefix = device.getConfig().voice && device.getConfig().voice.api || false;
                 
                 if(!this._remoteApiPrefix) {
@@ -28,7 +36,7 @@ require.def(
             },
             
             destroy: function() {
-                this._player.removeEventListener('ended', this._speechEnd);
+                this._player.removeEventListener('ended', _speechEnd);
                 this._player.stop();
                 this._player.destroy();
                 this.player = null;
@@ -50,13 +58,6 @@ require.def(
             _stopInternal: function() {
                 this._onComplete = null;
                 this._player.stop();
-            },
-
-            _speechEnd: function(ev) {
-                this._logger.log('Finished talking');
-                if (typeof this._onComplete === 'function') {
-                    this._onComplete();
-                }
             }
         });
 
