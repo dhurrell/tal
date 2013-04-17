@@ -11,28 +11,44 @@ require.def(
              * @param Number Maximum length of each chunk, in characters.
              */
             init: function(text, chunkLength) {
+                if (typeof text === 'string') {
+                    text = [text];
+                }
+                console.log('CHUNKER: ' + text.join('|'));
                 this._text = text;
                 this._desiredLength = chunkLength || 100;
                 this._currentPosition = 0;
+                this._index = 0;
             },
             
             getNextChunk: function() {
                 var self = this;
                 var startPosition = this._currentPosition;
+                
+                if (this._currentPosition >= this._text[this._index].length) {
+                    this._index++;
+                    this._currentPosition = 0;
+                    startPosition = 0;
+                }
+                
+                var text = this._text[this._index];
                 var nextBoundaryLength = findNextChunkLength();
                 
                 this._currentPosition += nextBoundaryLength;
-                return this._text.substr(startPosition, nextBoundaryLength).trim();
+                
+                var test = text.substr(startPosition, nextBoundaryLength).trim();
+                console.log('NEXT:' + test);
+                return test;
                 
                 // Helper function: Find the position of the next chunk boundary in the string.
                 function findNextChunkLength() {
-                    var remainingLength = self._text.length - self._currentPosition;
+                    var remainingLength = text.length - self._currentPosition;
                     
                     // Only check for a suitable end point for this chunk if it's longer
                     // than the target.
                     if (remainingLength > self._desiredLength) {
                         // Consider the next n characters of the string.
-                        var segmentToCheck = self._text.substr(self._currentPosition, self._desiredLength);
+                        var segmentToCheck = text.substr(self._currentPosition, self._desiredLength);
                         // Look for a chunk end: Prefer sentence terminators, then commas, then word boundaries.
                         var terminatorSets = [['.', '?', '!', ';'], [','], [' ']];
                         
@@ -59,7 +75,7 @@ require.def(
             },
             
             hasNextChunk: function() {
-                return this._text.length > this._currentPosition;
+                return this._index + 1 < this._text.length || this._text[this._index].length > this._currentPosition;
             }
         });
     }
