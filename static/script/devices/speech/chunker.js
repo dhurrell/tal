@@ -17,7 +17,7 @@ require.def(
                 
                 // Remove empty elements from the array
                 for (var i = text.length; i >= 0; i--) {
-                    if (typeof text[i] !== 'string' || !text.trim()) {
+                    if (typeof text[i] !== 'string' || !text[i].trim()) {
                         // Remove the element
                         text.splice(i, 1);
                     }
