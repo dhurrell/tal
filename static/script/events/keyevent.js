@@ -44,7 +44,7 @@ require.def('antie/events/keyevent',
 			 * @constructor
 			 * @ignore
 			 */
-			init: function(type, keyCode) {
+			init: function init(type, keyCode) {
 				var index;
 				this.keyCode = keyCode;
 
@@ -59,7 +59,7 @@ require.def('antie/events/keyevent',
 					this.keyChar = String.fromCharCode("A".charCodeAt(0) + index);
 				}
 
-				this._super(type);
+				init.base.call(this, type);
 			}
 		});
 

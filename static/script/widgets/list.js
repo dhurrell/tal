@@ -55,7 +55,7 @@ require.def('antie/widgets/list',
 			 * @constructor
 			 * @ignore
 			 */
-			init: function(id, itemFormatter, dataSource) {
+			init: function init(id, itemFormatter, dataSource) {
 				this._selectedIndex = 0;
 				this._dataSource = dataSource;
 				this._itemFormatter = itemFormatter;
@@ -64,19 +64,19 @@ require.def('antie/widgets/list',
 				this._renderMode = List.RENDER_MODE_CONTAINER;
 				this._dataBindingOrder = List.DATA_BIND_FORWARD;
 
-				this._super(id);
+				init.base.call(this, id);
 				this.addClass('list');
 			},
 			/**
 			 * Appends a child widget to this widget, creating a new list item.
 			 * @param {antie.widgets.Widget} widget The child widget to add.
 			 */
-			appendChildWidget: function(widget) {
+			appendChildWidget: function appendChildWidget(widget) {
 				if ((this._renderMode == List.RENDER_MODE_LIST) && !(widget instanceof ListItem)) {
 					var li = new ListItem();
 					li.appendChildWidget(widget);
 					li.setDataItem(widget.getDataItem());
-					this._super(li);
+					appendChildWidget.base.call(this, li);
 					return li;
 				} else {
 					widget.addClass('listitem');
@@ -89,13 +89,13 @@ require.def('antie/widgets/list',
 			 * @param {Integer} index The index where to insert the child widget.
 			 * @param {antie.widgets.Widget} widget The child widget to add.
 			 */
-			insertChildWidget: function(index, widget) {
+			insertChildWidget: function insertChildWidget(index, widget) {
 				var w;
 				if ((this._renderMode == List.RENDER_MODE_LIST) && !(widget instanceof ListItem)) {
 					w = new ListItem();
 					w.appendChildWidget(widget);
 					w.setDataItem(widget.getDataItem());
-					this._super(index, w);
+					insertChildWidget.base.call(this, index, w);
 				} else {
 				    widget.addClass('listitem');
 					this._super(index, widget);
@@ -114,9 +114,9 @@ require.def('antie/widgets/list',
 			 * @param {antie.widgets.Widget} widget The child widget to set focus to.
 			 * @returns Boolean true if the child widget was focusable, otherwise boolean false.
 			 */
-			setActiveChildWidget: function(widget) {
+			setActiveChildWidget: function setActiveChildWidget(widget) {
 				var changed = this._activeChildWidget != widget;
-				if (this._super(widget)) {
+				if (setActiveChildWidget.base.call(this, widget)) {
 					this._selectedIndex = this.getIndexOfChildWidget(widget);
 					if (changed) {
 						this.bubbleEvent(new SelectedItemChangeEvent(this, widget, this._selectedIndex));
@@ -132,21 +132,21 @@ require.def('antie/widgets/list',
 			 * @param {antie.devices.Device} device The device to render to.
 			 * @returns A device-specific object that represents the widget as displayed on the device (in a browser, a DOMElement);
 			 */
-			render: function(device) {
+			render: function render(device) {
 				if (!this._dataBound && this._dataSource && this._itemFormatter) {
 					this._createDataBoundItems(device);
 				}
 				if (!this.outputElement && (this._renderMode == List.RENDER_MODE_LIST)) {
 					this.outputElement = device.createList(this.id, this.getClasses());
 				}
-				return this._super(device);
+				return render.base.call(this, device);
 			},
 			/**
 			 * Create list items from the bound data.
 			 * @private
 			 * @param {antie.devices.Device} device The device to render to.
 			 */
-			_createDataBoundItems: function(device) {
+			_createDataBoundItems: function _createDataBoundItems(device) {
 				this._dataBound = true;
 
 				var self = this;
@@ -314,7 +314,7 @@ require.def('antie/widgets/list',
 
 				var ignore = this._childWidgetOrder.length - this._totalDataItems;
 				this._totalDataItems--;
-				var retValue = this._super(widget);
+				var retValue = _createDataBoundItems.base.call(this, widget);
 				widget.removeClass('listitem');
 
 				for (var i = 0; i < this._childWidgetOrder.length; i++) {
@@ -322,13 +322,13 @@ require.def('antie/widgets/list',
 				}
 				return retValue;
 			},
-			removeChildWidgets: function() {
+			removeChildWidgets: function removeChildWidgets() {
 				for (var i = 0; i < this._childWidgetOrder.length; i++) {
 					this._childWidgetOrder[i].removeClass('listitem');
 				}
 
 				this._totalDataItems = 0;
-				return this._super();
+				return removeChildWidgets.base.call(this);
 			},
 
 			setDataBindingOrder: function(order) {

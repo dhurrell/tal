@@ -44,8 +44,8 @@ require.def('antie/widgets/listitem',
 			 * @constructor
 			 * @ignore
 			 */
-			init: function(id) {
-				this._super(id);
+			init: function init(id) {
+				init.base.call(this, id);
 				this.addClass('listitem');
 			},
 			/**
@@ -53,11 +53,11 @@ require.def('antie/widgets/listitem',
 			 * @param {antie.devices.Device} device The device to render to.
 			 * @returns A device-specific object that represents the widget as displayed on the device (in a browser, a DOMElement);
 			 */
-			render: function(device) {
+			render: function render(device) {
 				if(!this.outputElement) {
 					this.outputElement = device.createListItem(this.id, this.getClasses());
 				}
-				return this._super(device);
+				return render.base.call(this, device);
 			}
 		});
 	}

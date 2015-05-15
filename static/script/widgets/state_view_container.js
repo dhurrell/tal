@@ -38,8 +38,8 @@ require.def ('antie/widgets/state_view_container', [
 
      var StateViewContainer = Container.extend( {
 
-        init:function(controller) {
-            this._super();
+        init:function init(controller) {
+            init.base.call(this);
 
             var self = this;
 

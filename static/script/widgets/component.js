@@ -45,8 +45,8 @@ require.def('antie/widgets/component',
              * @constructor
              * @ignore
              */
-            init: function(id) {
-                this._super(id);
+            init: function init(id) {
+                init.base.call(this, id);
                 this.addClass('component');
                 this._isModal = false;
             },

@@ -41,9 +41,9 @@ require.def('antie/events/selectevent',
 			 * @constructor
 			 * @ignore
 			 */
-			init: function(target) {
+			init: function init(target) {
 				this.target = target;
-				this._super("select");
+				init.base.call(this, "select");
 			}
 		});
 	}

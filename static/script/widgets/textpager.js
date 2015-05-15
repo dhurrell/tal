@@ -45,8 +45,8 @@ require.def('antie/widgets/textpager',
 			 * @constructor
 			 * @ignore
 			 */
-			init: function(id) {
-				this._super(id, "");
+			init: function init(id) {
+				init.base.call(this, id, "");
 				this.addClass('textpager');
 				this._page = 1;
 			},
@@ -55,7 +55,7 @@ require.def('antie/widgets/textpager',
 			 * @param {antie.devices.Device} device The device to render to.
 			 * @returns A device-specific object that represents the widget as displayed on the device (in a browser, a DOMElement);
 			 */
-			render: function(device) {
+			render: function render(device) {
 				var s = this._text;
 				
 				if(!this.outputElement) {
@@ -111,7 +111,7 @@ require.def('antie/widgets/textpager',
 			},
 
 			setText: function(text) {
-				this._super(text);
+				render.base.call(this, text);
 
 				// Remove the bottom padding to allow the page count to be
 				// recalculated.

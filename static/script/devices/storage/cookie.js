@@ -70,8 +70,8 @@ require.def(
 		}
 
 		var CookieStorage = StorageProvider.extend({
-			init: function(namespace) {
-				this._super();
+			init: function init(namespace) {
+				init.base.call(this);
 
 				this._namespace = namespace;
 
@@ -86,16 +86,16 @@ require.def(
 					}
 				}
 			},
-			setItem: function(key, value) {
-				this._super(key, value);
+			setItem: function setItem(key, value) {
+				setItem.base.call(this, key, value);
 				this._save();
 			},
-			removeItem: function(key) {
-				this._super(key);
+			removeItem: function removeItem(key) {
+				removeItem.base.call(this, key);
 				this._save();
 			},
-			clear: function() {
-				this._super();
+			clear: function clear() {
+				clear.base.call(this);
 				this._save();
 
 				// delete it from the stored namespaces

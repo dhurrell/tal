@@ -41,9 +41,9 @@ require.def('antie/events/tunerpresentingevent',
              * @constructor
              * @ignore
              */
-            init: function(channel) {
+            init: function init(channel) {
                 this.channel = channel;
-                this._super("tunerpresenting");
+                init.base.call(this, "tunerpresenting");
             }
         });
     }

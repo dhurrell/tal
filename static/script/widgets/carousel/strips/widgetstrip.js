@@ -41,8 +41,8 @@ require.def('antie/widgets/carousel/strips/widgetstrip',
              * @constructor
              * @ignore
              */
-            init: function (id, orientation) {
-                this._super(id);
+            init: function init (id, orientation) {
+                init.base.call(this, id);
                 this.addClass(orientation.styleClass());
                 this._orientation = orientation;
                 this._lengths = [];

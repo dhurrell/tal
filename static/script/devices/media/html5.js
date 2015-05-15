@@ -45,8 +45,8 @@ require.def(
         var currentVolume = -1;
 
         var HTML5Player = MediaInterface.extend({
-            init: function(id, mediaType, eventHandlingCallback) {
-                this._super(id);
+            init: function init(id, mediaType, eventHandlingCallback) {
+                init.base.call(this, id);
 
                 this._eventHandlingCallback = eventHandlingCallback;
 

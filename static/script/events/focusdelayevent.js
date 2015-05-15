@@ -42,9 +42,9 @@ require.def('antie/events/focusdelayevent',
 			 * @constructor
 			 * @ignore
 			 */
-			init: function(target) {
+			init: function init(target) {
 				this.target = target;
-				this._super("focusdelay");
+				init.base.call(this, "focusdelay");
 			}
 		});
 	}

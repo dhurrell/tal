@@ -42,9 +42,9 @@ require.def('antie/widgets/carousel/navigators/wrappingnavigator',
                  * @param index
                  * @returns {Number} the first focussable index after that supplied
                  */
-                indexAfter: function (index) {
+                indexAfter: function indexAfter (index) {
                     var potentialIndex;
-                    potentialIndex = this._super(index);
+                    potentialIndex = indexAfter.base.call(this, index);
                     return this._validateIndex(index, potentialIndex);
                 },
 
@@ -52,9 +52,9 @@ require.def('antie/widgets/carousel/navigators/wrappingnavigator',
                  * @param index
                  * @returns {Number} the first focussable index before that supplied
                  */
-                indexBefore: function (index) {
+                indexBefore: function indexBefore (index) {
                     var potentialIndex;
-                    potentialIndex = this._super(index);
+                    potentialIndex = indexBefore.base.call(this, index);
                     return this._validateIndex(index, potentialIndex);
                 },
 

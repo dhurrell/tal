@@ -43,11 +43,11 @@ require.def('antie/events/beforeselecteditemchangeevent',
 			 * @constructor
 			 * @ignore
 			 */
-			init: function(target, item, index) {
+			init: function init(target, item, index) {
 				this.target = target;
 				this.item = item;
 				this.index = index;
-				this._super("beforeselecteditemchange");
+				init.base.call(this, "beforeselecteditemchange");
 			}
 		});
 	}

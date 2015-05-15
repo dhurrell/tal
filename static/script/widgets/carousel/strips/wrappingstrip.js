@@ -41,8 +41,8 @@ require.def('antie/widgets/carousel/strips/wrappingstrip',
              * @constructor
              * @ignore
              */
-            init: function (id, orientation) {
-                this._super(id, orientation);
+            init: function init (id, orientation) {
+                init.base.call(this, id, orientation);
                 this._clones = [];
                 this._prependedClones = [];
                 this._appendedClones = [];
@@ -58,7 +58,7 @@ require.def('antie/widgets/carousel/strips/wrappingstrip',
              * @param {antie.devices.Device} device The device to render to.
              * @returns A device-specific object that represents the widget as displayed on the device (in a browser, a DOMElement);
              */
-            render: function (device) {
+            render: function render (device) {
                 var i;
                 if (!this.outputElement) {
                     this.outputElement = device.createContainer(this.id, this.getClasses());
@@ -81,7 +81,7 @@ require.def('antie/widgets/carousel/strips/wrappingstrip',
              * Note length only currently working with non-wrapping strips.
              */
             append: function (widget, length) {
-                this._super(widget, length);
+                render.base.call(this, widget, length);
                 this._recalculateIfAuto();
             },
 
@@ -95,8 +95,8 @@ require.def('antie/widgets/carousel/strips/wrappingstrip',
              * positioning calculations rather then a calculated value (can be useful when widgets change size)
              * Note length only currently working with non-wrapping strips.
              */
-            insert: function (index, widget, length) {
-                this._super(index, widget, length);
+            insert: function insert (index, widget, length) {
+                insert.base.call(this, index, widget, length);
                 this._recalculateIfAuto();
             },
 
@@ -104,8 +104,8 @@ require.def('antie/widgets/carousel/strips/wrappingstrip',
              * Removes a widget from the strip
              * @param {antie.widgets.Widget} widget. Widget to remove from the strip
              */
-            remove: function (widget, retainElement) {
-                this._super(widget, retainElement);
+            remove: function remove (widget, retainElement) {
+                remove.base.call(this, widget, retainElement);
                 this._recalculateIfAuto();
             },
 

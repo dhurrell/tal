@@ -33,8 +33,8 @@ require.def(
         'use strict';
         return TransitionDefinition.extend(
             {
-                init: function (transDef) {
-                    this._super();
+                init: function init (transDef) {
+                    init.base.call(this);
                     this._copyToSelf(transDef);
                 },
                 

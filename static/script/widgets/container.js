@@ -49,7 +49,7 @@ require.def('antie/widgets/container',
 			 * @constructor
 			 * @ignore
 			 */
-			init: function(id) {
+			init: function init(id) {
 				/*
                 * Performance consideration - do we need to store 2 references to each child widget? 
                 * One keyed by ID, one in an array to maintain order?
@@ -59,7 +59,7 @@ require.def('antie/widgets/container',
 				this._activeChildWidget = null;
 				this._autoRenderChildren = true;
 
-				this._super(id);
+				init.base.call(this, id);
 
 				this.addClass('container');
 			},

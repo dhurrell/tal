@@ -44,11 +44,11 @@ require.def('antie/events/mediasourceerrorevent',
 			 * @constructor
 			 * @ignore
 			 */
-			init: function(target, code, url, last) {
+			init: function init(target, code, url, last) {
 				this.url = url;
 				this.last = last;
 
-				this._super(target, code);
+				init.base.call(this, target, code);
 			}
 		});
 

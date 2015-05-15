@@ -41,8 +41,8 @@ require.def('antie/widgets/scrubbar',
 		 * @param {double} [largeIncrementAfter] Number of smallIncrements to perform until switching to largeIncrement when key is held down.
 		 */
 		return HorizontalSlider.extend(/** @lends antie.widgets.ScrubBar.prototype */ {
-			init: function(id, initialValue, smallIncrement, largeIncrement, largeIncrementAfter) {
-				this._super(id, initialValue, smallIncrement, largeIncrement, largeIncrementAfter);
+			init: function init(id, initialValue, smallIncrement, largeIncrement, largeIncrementAfter) {
+				init.base.call(this, id, initialValue, smallIncrement, largeIncrement, largeIncrementAfter);
 
 				this._bufferedRange = {start: 0, end: 0};
 				this._lastBufferLeft = -1;
@@ -54,8 +54,8 @@ require.def('antie/widgets/scrubbar',
 			 * @param {antie.devices.Device} device The device to render to.
 			 * @returns A device-specific object that represents the widget as displayed on the device (in a browser, a DOMElement);
 			 */
-			render: function(device) {
-				this.outputElement = this._super(device);
+			render: function render(device) {
+				this.outputElement = render.base.call(this, device);
 				this._buffer = device.createButton(this.id+'_buffer');
 				device.addClassToElement(this._buffer, 'scrubbarbuffer');
 				device.prependChildElement(this.outputElement, this._buffer);

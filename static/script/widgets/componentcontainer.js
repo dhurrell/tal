@@ -46,7 +46,7 @@ require.def('antie/widgets/componentcontainer',
              * @constructor
              * @ignore
              */
-            init: function (id) {
+            init: function init (id) {
                 this._loadingIndex = 0;
                 this._loadingModule = null;
                 this._currentModule = null;
@@ -54,7 +54,7 @@ require.def('antie/widgets/componentcontainer',
                 this._currentArgs = null;
                 this._historyStack = [];
                 this._previousFocus = null;
-                this._super(id);
+                init.base.call(this, id);
                 this.addClass('componentcontainer');
             },
             /**

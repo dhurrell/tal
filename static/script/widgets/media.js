@@ -54,8 +54,8 @@ require.def('antie/widgets/media',
 			 * @constructor
 			 * @ignore
 			 */
-			init: function(id, mediaType) {
-				this._super(id);
+			init: function init(id, mediaType) {
+				init.base.call(this, id);
 
                 var self = this;
 

@@ -45,8 +45,8 @@ require.def('antie/widgets/image',
 			 * @constructor
 			 * @ignore
 			 */
-			init: function(id, src, size) {
-				this._super(id);
+			init: function init(id, src, size) {
+				init.base.call(this, id);
 				this._src = src;
 				this._size = size;
 				this._imageElement = null;
@@ -58,10 +58,10 @@ require.def('antie/widgets/image',
 			 * @param {antie.devices.Device} device The device to render to.
 			 * @returns A device-specific object that represents the widget as displayed on the device (in a browser, a DOMElement);
 			 */
-			render: function(device) {
+			render: function render(device) {
 				this._imageElement = device.createImage(this.id + "_img", null, this._src, this._size);
 				if(this._renderMode == Image.RENDER_MODE_CONTAINER) {
-					this.outputElement = this._super(device);
+					this.outputElement = render.base.call(this, device);
 					if(this._size) {
 						device.setElementSize(this.outputElement, this._size);
 					}

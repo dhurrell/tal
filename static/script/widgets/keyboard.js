@@ -54,8 +54,8 @@ require.def('antie/widgets/keyboard',
 			 * @constructor
 			 * @ignore
 			 */
-			init: function(id, cols, rows, keys) {
-				this._super(id, cols, rows);
+			init: function init(id, cols, rows, keys) {
+				init.base.call(this, id, cols, rows);
 
 				this.addClass('keyboard');
 

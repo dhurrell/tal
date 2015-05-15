@@ -28,9 +28,9 @@
 
 require.def('fixtures/components/eventtestcomponent', ['antie/widgets/component'], function(Component) {
 	return Component.extend({
-		init: function() {
+		init: function init() {
 			var self = this;
-			this._super("onLoadTestComponent");
+			init.base.call(this, "onLoadTestComponent");
 			this.addEventListener("load", function(ev) { self._onEvent(ev); });
 			this.addEventListener("beforerender", function(ev) { self._onEvent(ev); });
 			this.addEventListener("beforeshow", function(ev) { self._onEvent(ev); });

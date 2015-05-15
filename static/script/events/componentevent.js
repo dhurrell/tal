@@ -47,13 +47,13 @@ require.def('antie/events/componentevent',
 			 * @constructor
 			 * @ignore
 			 */
-			init: function(type, container, component, args, state, fromBack) {
+			init: function init(type, container, component, args, state, fromBack) {
 				this.container = container;
 				this.component = component;
 				this.args = args;
 				this.state = state;
 				this.fromBack = fromBack;
-				this._super(type);
+				init.base.call(this, type);
 			}
 		});
 	}

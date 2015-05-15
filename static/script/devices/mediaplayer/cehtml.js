@@ -45,8 +45,8 @@ require.def(
          */
         var Player = MediaPlayer.extend({
 
-            init: function() {
-                this._super();
+            init: function init() {
+                init.base.call(this);
                 this._setSentinelLimits();
                 this._state = MediaPlayer.STATE.EMPTY;
             },

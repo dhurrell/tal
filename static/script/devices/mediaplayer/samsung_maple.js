@@ -45,8 +45,8 @@ require.def(
          */
         var Player = MediaPlayer.extend({
 
-            init: function() {
-                this._super();
+            init: function init() {
+                init.base.call(this);
                 this._state = MediaPlayer.STATE.EMPTY;
                 this._playerPlugin = document.getElementById('playerPlugin');
                 this._deferSeekingTo = null;

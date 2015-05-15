@@ -46,8 +46,8 @@ require.def(
          * @extends antie.devices.mediaplayer.HTML5
          */
         var Player = HTML5MediaPlayer.extend( /** @lends antie.devices.mediaplayer.HTML5MemoryLeakUnfix.prototype */ {
-            init: function() {
-                this._super();
+            init: function init() {
+                init.base.call(this);
             },
 
             _unloadMediaSrc: function() {

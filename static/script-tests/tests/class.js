@@ -48,7 +48,7 @@
 		queuedRequire(queue, ["antie/class"], function(Class) {
 
 			var ExtendedClass = Class.extend({
-				init: function(value) {
+				init: function init(value) {
 					this._variable = value;
 				},
 				returnMethodString: function() {
@@ -129,8 +129,8 @@
 				}
 			});
 			var ExtendedThriceClass = ExtendedTwiceClass.extend({
-				overridableFunction: function() {
-					return this._super();
+				overridableFunction: function overrideableFunction() {
+					return overrideableFunction.base.call(this);
 				}
 			});
 

@@ -41,8 +41,8 @@ require.def('antie/events/tunerunavailableevent',
              * @constructor
              * @ignore
              */
-            init: function () {
-                this._super("tunerunavailable");
+            init: function init () {
+                init.base.call(this, "tunerunavailable");
             }
         });
     }

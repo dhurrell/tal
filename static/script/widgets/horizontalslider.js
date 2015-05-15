@@ -57,7 +57,7 @@ require.def('antie/widgets/horizontalslider',
 			 * @constructor
 			 * @ignore
 			 */
-			init: function(id, initialValue, smallIncrement, largeIncrement, largeIncrementAfter) {
+			init: function init(id, initialValue, smallIncrement, largeIncrement, largeIncrementAfter) {
 				this._value = initialValue ? initialValue : 0;
 				this._smallIncrement = smallIncrement ? smallIncrement : 0.01;
 				this._largeIncrement = largeIncrement ? largeIncrement : 0.05;
@@ -65,7 +65,7 @@ require.def('antie/widgets/horizontalslider',
 				this._lastLeft = -1;
 				this._keyPressTimer = null;
 
-				this._super(id);
+				init.base.call(this, id);
 				this.addClass('horizontalslider');
 
 				this._currentIncrementCount = 0;

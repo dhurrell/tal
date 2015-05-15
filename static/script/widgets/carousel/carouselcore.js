@@ -60,9 +60,9 @@ require.def('antie/widgets/carousel/carouselcore',
              * @constructor
              * @ignore
              */
-			init: function (id, orientation) {
+			init: function init (id, orientation) {
 				this.id = id;
-				this._super(id);
+				init.base.call(this, id);
                 this._setOrientation(orientation || Carousel.orientations.VERTICAL);
                 this.setWidgetStrip(WidgetStrip);
 				this._mask = new Mask(this.id + '_CarouselMask', this._widgetStrip, this._orientation);

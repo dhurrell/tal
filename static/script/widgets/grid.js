@@ -49,8 +49,8 @@ require.def('antie/widgets/grid',
 			 * @constructor
 			 * @ignore
 			 */
-			init: function(id, cols, rows) {
-				this._super(id);
+			init: function init(id, cols, rows) {
+				init.base.call(this, id);
 				this.addClass('grid');
 				this._cols = cols;
 				this._rows = rows;
@@ -69,7 +69,7 @@ require.def('antie/widgets/grid',
 			 * @param {Integer} row The row the widget it in
 			 * @returns The widget in the specified column and row
 			 */
-			getWidgetAt: function(col, row) {
+			getWidgetAt: function getWidgetAt(col, row) {
 				return this._childWidgetOrder[(this._cols * row) + col];
 			},
 			/**
@@ -175,7 +175,7 @@ require.def('antie/widgets/grid',
 			 */
 			setActiveChildWidget: function(widget) {
 				var changed = this._activeChildWidget != widget;
-				if(this._super(widget)) {
+				if(getWidgetAt.base.call(this, widget)) {
 					var selectedIndex = this.getIndexOfChildWidget(widget);
 					this._selectedRow = Math.floor(selectedIndex / this._cols);
 					this._selectedCol = Math.floor(selectedIndex % this._cols);

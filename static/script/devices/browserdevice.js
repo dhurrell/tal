@@ -52,8 +52,8 @@ require.def("antie/devices/browserdevice",
              * @constructor
              * @ignore
              */
-            init: function(config) {
-                this._super(config);
+            init: function init(config) {
+                init.base.call(this, config);
                 this._textSizeCache = {};
 
                 this.addClassToElement(this.getTopLevelElement(), "notanimating");

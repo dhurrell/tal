@@ -45,7 +45,7 @@ require.def('antie/widgets/carousel',
              * Appends a child widget to this widget.
              * @param {antie.widgets.Widget} widget The child widget to add.
              */
-            appendChildWidget: function (widget) {
+            appendChildWidget: function appendChildWidget (widget) {
                 return this.append(widget);
             },
 
@@ -92,7 +92,7 @@ require.def('antie/widgets/carousel',
              */
             setActiveChildWidget: function (widget) {
                 if (widget === this._mask) {
-                    return this._super(widget);
+                    return appendChildWidget.base.call(this, widget);
                 } else {
                     return this.setActiveWidget(widget);
                 }
@@ -102,9 +102,9 @@ require.def('antie/widgets/carousel',
              * Checks to see if a specific widget is a direct child of this widget.
              * @param {antie.widgets.Widget} widget The widget to check to see if it is a direct child of this widget.
              */
-            hasChildWidget: function (id) {
+            hasChildWidget: function hasChildWidget (id) {
                 if (id === this._mask.id) {
-                    return this._super(id);
+                    return hasChildWidget.base.call(this, id);
                 } else {
                     return this._widgetStrip.hasChildWidget(id);
                 }

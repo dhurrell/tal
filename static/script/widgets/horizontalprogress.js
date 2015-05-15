@@ -47,12 +47,12 @@ require.def('antie/widgets/horizontalprogress',
 			 * @constructor
 			 * @ignore
 			 */
-			init: function(id, showLabel, initialValue) {
+			init: function init(id, showLabel, initialValue) {
 				this._value = initialValue ? initialValue : 0;
 				this._moveHandle = false;
 				this._lastLeft = null;
 
-				this._super(id);
+				init.base.call(this, id);
 				this.addClass('horizontalprogress');
 
 				if(showLabel) {

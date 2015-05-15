@@ -40,8 +40,8 @@ require.def('antie/events/tunerstoppedevent',
              * @constructor
              * @ignore
              */
-            init: function() {
-                this._super("tunerstopped");
+            init: function init() {
+                init.base.call(this, "tunerstopped");
             }
         });
     }

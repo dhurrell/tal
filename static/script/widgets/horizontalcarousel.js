@@ -51,7 +51,7 @@ require.def('antie/widgets/horizontalcarousel',
 			 * @constructor
 			 * @ignore
 			 */
-			init: function(id, itemFormatter, dataSource, overrideAnimation, activeWidgetAlignment, BeforeSelectedItemChangeEvent) {
+			init: function init(id, itemFormatter, dataSource, overrideAnimation, activeWidgetAlignment, BeforeSelectedItemChangeEvent) {
 				this._prefixClones = 0;
 				this._wrapMode = HorizontalCarousel.WRAP_MODE_VISUAL;
 				this._viewportMode = HorizontalCarousel.VIEWPORT_MODE_NONE;
@@ -68,7 +68,7 @@ require.def('antie/widgets/horizontalcarousel',
 				this._nodeOffset = 0;
 				this._childWidgetsInDocument = [];
 				this._paddingItemsCreated = false;
-				this._super(id, itemFormatter, dataSource);
+				init.base.call(this, id, itemFormatter, dataSource);
 				this.addClass('horizontalcarousel');
 
 				var self = this;
@@ -93,7 +93,7 @@ require.def('antie/widgets/horizontalcarousel',
 			 * @param {antie.devices.Device} device The device to render to.
 			 * @returns A device-specific object that represents the widget as displayed on the device (in a browser, a DOMElement);
 			 */
-			render: function(device) {
+			render: function render(device) {
 				// keep the element hidden until data is bound and items created
 				if(!this._maskElement) {
 					this._maskElement = device.createContainer(this.id + '_mask', ['horizontallistmask', 'notscrolling']);
@@ -103,7 +103,7 @@ require.def('antie/widgets/horizontalcarousel',
 				}
 
 				if(this._viewportMode != HorizontalCarousel.VIEWPORT_MODE_DOM) {
-					device.appendChildElement(this._maskElement, this._super(device));
+					device.appendChildElement(this._maskElement, render.base.call(this, device));
 				} else {
 					if(!this._dataBound && this._dataSource && this._itemFormatter) {
 						this._createDataBoundItems(device);
@@ -136,7 +136,7 @@ require.def('antie/widgets/horizontalcarousel',
 
 				return this._maskElement;
 			},
-			refreshViewport: function() {
+			refreshViewport: function refreshViewport() {
 				var _centerWidget = this._activeChildWidget || this._childWidgetOrder[0];
 				if(!_centerWidget) {
 					return;
@@ -262,7 +262,7 @@ require.def('antie/widgets/horizontalcarousel',
 			 * @returns Boolean true if the child widget was focusable, otherwise boolean false.
 			 */
 			setActiveChildWidget: function(widget, reposition) {
-				var moved = this._super(widget);
+				var moved = refreshViewport.base.call(this, widget);
 
 				if(this._activeChildWidget && this.outputElement && reposition) {
 					if(this._viewportMode != HorizontalCarousel.VIEWPORT_MODE_DOM) {
@@ -282,7 +282,7 @@ require.def('antie/widgets/horizontalcarousel',
 			 * @param {Integer} index Index of the child widget to set focus to.
 			 * @returns Boolean true if the child widget was focusable, otherwise boolean false.
 			 */
-			setActiveChildIndex: function(index, reposition) {
+			setActiveChildIndex: function setActiveChildIndex(index, reposition) {
 				if(index < 0 || index >= this._childWidgetOrder.length) {
 					throw new Error("HorizontalCarousel::setActiveChildIndex Index out of bounds. " + this.id + " contains " + this._childWidgetOrder.length + " children, but an index of " + index + " was specified.");
 				}
@@ -290,9 +290,9 @@ require.def('antie/widgets/horizontalcarousel',
 			},
 			setDataSource: function(data) {
 				this._prefixClones = 0;
-				this._super(data);
+				setActiveChildIndex.base.call(this, data);
 			},
-			rebindDataSource: function() {
+			rebindDataSource: function rebindDataSource() {
 				var device = this.getCurrentApplication().getDevice();
 				var config = device.getConfig();
 				var animate = !config.widgets || !config.widgets.horizontalcarousel || (config.widgets.horizontalcarousel.fade !== false);
@@ -491,7 +491,7 @@ require.def('antie/widgets/horizontalcarousel',
              * @returns Boolean true if animation was called, otherwise false
              */
             show: function( options ){
-              //  this._super( options );
+              //  rebindDataSource.base.call(this,  options );
                 var application = this.getCurrentApplication();
                 if(!application) {
                     return;

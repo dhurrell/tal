@@ -42,12 +42,12 @@ require.def('antie/widgets/label',
 			 * @constructor
 			 * @ignore
 			 */
-			init: function(id, text) {
+			init: function init(id, text) {
                 // The current API states that if only one parameter is passed to
                 // use that value as the text and auto generate an internal id
 				if(arguments.length == 1) {
 					this._text = id;
-					this._super();
+					init.base.call(this);
 				} else {
 					this._text = text;
 					this._super(id);
