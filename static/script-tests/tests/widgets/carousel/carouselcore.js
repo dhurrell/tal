@@ -39,14 +39,12 @@
 		queuedApplicationInit(queue,
 			'lib/mockapplication',
 			[
-				'antie/widgets/carousel/carouselcore',
-				"antie/widgets/widget"
+				'antie/widgets/carousel/carouselcore'
 			],
-			function (application, CarouselCore, Widget) {
-				var carousel, createWidgetSpy;
-				createWidgetSpy = self.sandbox.spy(Widget.prototype, 'init').withArgs('myCarousel_CarouselMask');
-				carousel = new CarouselCore('myCarousel');
-				assertTrue(createWidgetSpy.calledOnce);
+			function (application, CarouselCore) {
+				var carousel = new CarouselCore('myCarousel');
+				assertEquals(1, carousel.getChildWidgetCount());
+				assert(carousel.hasChildWidget('myCarousel_CarouselMask'));
 			}
 		);
 	};
@@ -56,14 +54,13 @@
 		queuedApplicationInit(queue,
 			'lib/mockapplication',
 			[
-				'antie/widgets/carousel/carouselcore',
-				"antie/widgets/container"
+				'antie/widgets/carousel/carouselcore'
 			],
-			function (application, CarouselCore, Container) {
-				var carousel, createContainerStub;
-				createContainerStub = self.sandbox.spy(Container.prototype, 'init').withArgs('myCarousel_WidgetStrip');
-				carousel = new CarouselCore('myCarousel');
-				assertTrue(createContainerStub.calledOnce);
+			function (application, CarouselCore) {
+				var carousel = new CarouselCore('myCarousel');
+				var firstChild = carousel.getChildWidgets()[0];
+				assertEquals(1, firstChild.getChildWidgetCount());
+				assert(firstChild.hasChildWidget('myCarousel_WidgetStrip'));
 			}
 		);
 	};
