@@ -136,7 +136,7 @@ require.def('antie/widgets/horizontalcarousel',
 
 				return this._maskElement;
 			},
-			refreshViewport: function refreshViewport() {
+			refreshViewport: function () {
 				var _centerWidget = this._activeChildWidget || this._childWidgetOrder[0];
 				if(!_centerWidget) {
 					return;
@@ -261,8 +261,8 @@ require.def('antie/widgets/horizontalcarousel',
 			 * @param {Boolean} [reposition] Set to <code>true</code> if you want to scroll the carousel to the new item.
 			 * @returns Boolean true if the child widget was focusable, otherwise boolean false.
 			 */
-			setActiveChildWidget: function(widget, reposition) {
-				var moved = refreshViewport.base.call(this, widget);
+			setActiveChildWidget: function setActiveChildWidget(widget, reposition) {
+				var moved = setActiveChildWidget.base.call(this, widget);
 
 				if(this._activeChildWidget && this.outputElement && reposition) {
 					if(this._viewportMode != HorizontalCarousel.VIEWPORT_MODE_DOM) {

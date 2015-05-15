@@ -45,7 +45,7 @@ require.def('antie/widgets/carousel',
              * Appends a child widget to this widget.
              * @param {antie.widgets.Widget} widget The child widget to add.
              */
-            appendChildWidget: function appendChildWidget (widget) {
+            appendChildWidget: function (widget) {
                 return this.append(widget);
             },
 
@@ -90,9 +90,9 @@ require.def('antie/widgets/carousel',
              * @param {antie.widgets.Widget} widget The child widget to set focus to.
              * @returns Boolean true if the child widget was focusable, otherwise boolean false.
              */
-            setActiveChildWidget: function (widget) {
+            setActiveChildWidget: function setActiveChildWidget(widget) {
                 if (widget === this._mask) {
-                    return appendChildWidget.base.call(this, widget);
+                    return setActiveChildWidget.base.call(this, widget);
                 } else {
                     return this.setActiveWidget(widget);
                 }

@@ -69,7 +69,7 @@ require.def('antie/widgets/grid',
 			 * @param {Integer} row The row the widget it in
 			 * @returns The widget in the specified column and row
 			 */
-			getWidgetAt: function getWidgetAt(col, row) {
+			getWidgetAt: function(col, row) {
 				return this._childWidgetOrder[(this._cols * row) + col];
 			},
 			/**
@@ -173,9 +173,9 @@ require.def('antie/widgets/grid',
 			 * @param {antie.widgets.Widget} widget The child widget to set focus to.
 			 * @returns Boolean true if the child widget was focusable, otherwise boolean false.
 			 */
-			setActiveChildWidget: function(widget) {
+			setActiveChildWidget: function setActiveChildWidget(widget) {
 				var changed = this._activeChildWidget != widget;
-				if(getWidgetAt.base.call(this, widget)) {
+				if(setActiveChildWidget.base.call(this, widget)) {
 					var selectedIndex = this.getIndexOfChildWidget(widget);
 					this._selectedRow = Math.floor(selectedIndex / this._cols);
 					this._selectedCol = Math.floor(selectedIndex % this._cols);

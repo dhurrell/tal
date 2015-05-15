@@ -58,7 +58,7 @@ require.def('antie/widgets/carousel/strips/wrappingstrip',
              * @param {antie.devices.Device} device The device to render to.
              * @returns A device-specific object that represents the widget as displayed on the device (in a browser, a DOMElement);
              */
-            render: function render (device) {
+            render: function (device) {
                 var i;
                 if (!this.outputElement) {
                     this.outputElement = device.createContainer(this.id, this.getClasses());
@@ -80,8 +80,8 @@ require.def('antie/widgets/carousel/strips/wrappingstrip',
              * positioning calculations rather then a calculated value (can be useful when widgets change size)
              * Note length only currently working with non-wrapping strips.
              */
-            append: function (widget, length) {
-                render.base.call(this, widget, length);
+            append: function append(widget, length) {
+                append.base.call(this, widget, length);
                 this._recalculateIfAuto();
             },
 

@@ -52,7 +52,7 @@ require.def('antie/widgets/carousel/strips/cullingstrip',
                 this._widgetContexts.push(this.createContext(widget, this));
             },
 
-            render: function render (device) {
+            render: function (device) {
                 var i, context;
                 if (!this.outputElement) {
                     this.outputElement = device.createContainer(this.id, this.getClasses());
@@ -66,8 +66,8 @@ require.def('antie/widgets/carousel/strips/cullingstrip',
                 return this.outputElement;
             },
 
-            insert: function (index, widget, length) {
-                render.base.call(this, index, widget, length);
+            insert: function insert(index, widget, length) {
+                insert.base.call(this, index, widget, length);
                 this._widgetContexts.splice(index, 0, this.createContext(widget, this));
             },
 

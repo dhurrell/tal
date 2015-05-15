@@ -80,7 +80,7 @@ require.def('antie/widgets/list',
 					return li;
 				} else {
 					widget.addClass('listitem');
-					this._super(widget);
+					appendChildWidget.base.call(this, widget);
 					return widget;
 				}
 			},
@@ -98,7 +98,7 @@ require.def('antie/widgets/list',
 					insertChildWidget.base.call(this, index, w);
 				} else {
 				    widget.addClass('listitem');
-					this._super(index, widget);
+					insertChildWidget.base.call(this, index, widget);
 					w = widget;
 				}
 				if (index <= this._selectedIndex && 
@@ -146,7 +146,7 @@ require.def('antie/widgets/list',
 			 * @private
 			 * @param {antie.devices.Device} device The device to render to.
 			 */
-			_createDataBoundItems: function _createDataBoundItems(device) {
+			_createDataBoundItems: function (device) {
 				this._dataBound = true;
 
 				var self = this;
@@ -302,7 +302,7 @@ require.def('antie/widgets/list',
 				}
 			},
 
-			removeChildWidget: function(widget) {
+			removeChildWidget: function removeChildWidget(widget) {
 				// TODO: Make this more generic - it will only work if carousel items contain a
 				// TODO: single item of data.
 				if (this._updateProgressHandler && (this._childWidgetOrder.length < this._totalDataItems)) {
@@ -314,7 +314,7 @@ require.def('antie/widgets/list',
 
 				var ignore = this._childWidgetOrder.length - this._totalDataItems;
 				this._totalDataItems--;
-				var retValue = _createDataBoundItems.base.call(this, widget);
+				var retValue = removeChildWidget.base.call(this, widget);
 				widget.removeClass('listitem');
 
 				for (var i = 0; i < this._childWidgetOrder.length; i++) {
