@@ -9,7 +9,7 @@
 (\w+)(:\s*)function(?s)(.+?)this._super\(\)
 \1\2function \1\3\1.base.call(this)
 
-(\w+)(:\s*)function(?s)(.+?)this._super\((.*?)\)
+(\w+)(:\s*)function(?s)(.+?)this._super\s*\((.*?)\)
 \1\2function \1\3\1.base.call(this, \4)
 
 .base.call\(this,\s+\)
